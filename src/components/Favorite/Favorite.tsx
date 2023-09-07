@@ -1,12 +1,10 @@
 import React from 'react';
 import {useAppSelector} from "../../hooks/useAppSelector";
 import FavoriteCard from "./FavoriteCard";
-import {clearBasket} from "../../store/Reducers/BasketSlice";
 import {clearFavorite} from "../../store/Reducers/FavoriteSlice";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {Link} from "react-router-dom";
 import {AiOutlineArrowLeft} from "react-icons/ai";
-import BasketCard from "../Basket/BasketCard";
 
 
 const Favorite = ({el}:any) => {

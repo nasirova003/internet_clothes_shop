@@ -8,16 +8,15 @@ import {removeFromAdmin} from "../../store/Reducers/BasketSlice";
 
 
 
-const ProductCard = ({el}:any) => {
+const FavoriteCard = ({el}:any) => {
     const dispatch = useAppDispatch()
     console.log('favorite', el)
     const {favoriteItems,value} = useAppSelector(state => state.favoriteSlice)
     const [button, setButton] = useState(false)
-    const {mode} = useAppSelector(state => state.darkModeSlice)
-
-    const btn = () => {
-        setButton(!button)
-    }
+    //
+    // const btn = () => {
+    //     setButton(!button)
+    // }
 
 
     return (
@@ -52,13 +51,9 @@ const ProductCard = ({el}:any) => {
                         </div>
                     </div>
                 </div>
-
             }
-
         </div>
-
-
     );
 };
 
-export default ProductCard;
+export default FavoriteCard;

@@ -38,7 +38,7 @@ const Basket = ({el}: any) => {
                                 <h1 className="text-L p-5">PRODUCT</h1>
                                 <h1 className="text-lg p-5">NAME</h1>
                                 <h1 className="text-lg p-5">ABOUT</h1>
-                                <h1 className="text-lg p-5">TOTAL PRICE (0)</h1>
+                                <h1 className="text-lg p-5">TOTAL PRODUCT ({basketItems.length})</h1>
                                 <button className="m-3 w-28 text-lg text-white focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 px-px" onClick={() => dispatch(clearBasket(el))}>CLEAR ALL</button>
                             </div>
                             {

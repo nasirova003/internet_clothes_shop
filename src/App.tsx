@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import Product from "./components/ProductCard/Product";
 import {Route, Routes} from "react-router-dom";
-import Home from "./components/Home";
+import Home from "./components/Home/Home";
 import Favorite from "./components/Favorite/Favorite";
 import Basket from "./components/Basket/Basket";
 import Header from "./components/Header/Header";

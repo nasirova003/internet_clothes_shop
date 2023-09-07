@@ -1,14 +1,14 @@
 import React, {} from 'react';
 import {AiOutlineCloseCircle, AiOutlineDelete} from "react-icons/ai";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
-import {decrease, increase,  removeFromBasket} from "../../store/Reducers/BasketSlice";
+import {decrease, increase, removeFromBasket} from "../../store/Reducers/BasketSlice";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {openOrder} from "../../store/Reducers/OrderSlice";
 
 
 const BasketCard = ({el}: any) => {
     const {basketItems} = useAppSelector(state => state.basketSlice)
-    const {isOpenOrder}=useAppSelector(state => state.orderSlice)
+    const {isOpenOrder} = useAppSelector(state => state.orderSlice)
     const dispatch = useAppDispatch()
     console.log('basket', el)
 
@@ -18,7 +18,6 @@ const BasketCard = ({el}: any) => {
     const minus = (el: any) => {
         dispatch(decrease(el))
     }
-
 
 
     return (
@@ -35,7 +34,7 @@ const BasketCard = ({el}: any) => {
                         <th className=" cloth px-20 py-12  ">
                             <img src={el.image} alt=""/>
                             <th scope="col" className="px-6 py-1 text-xl text-cyan-900">
-                                <h1>{el.price*el.best} $</h1>
+                                <h1>{el.price * el.best} $</h1>
                             </th>
                         </th>
 
@@ -50,19 +49,22 @@ const BasketCard = ({el}: any) => {
                             <h1 className=" text-2xl p-5 text-blue-950 cursor-pointer"><span
                                 onClick={() => plus(el)}>+</span>
                                 <span>{el.best}</span>
-                                <span  onClick={() => {
+                                <span onClick={() => {
                                     minus(el)
                                 }}>-</span></h1>
                         </th>
                         <button onClick={() => dispatch(removeFromBasket(el))}
                                 className="text-3xl text-slate-400 ml-36 p-2">
-                                <AiOutlineCloseCircle/>
+                            <AiOutlineCloseCircle/>
                         </button>
                     </tr>
 
                     </thead>
 
-                    <button onClick={()=>dispatch( openOrder(el))} className="buyBtn m-3 w-32 py-2  text-white focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-600  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 px-px">Оставить отзыв</button>
+                    <button onClick={() => dispatch(openOrder(el))}
+                            className="buyBtn m-3 w-32 py-2  text-white focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-600  dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700 px-px">Оставить
+                        отзыв
+                    </button>
 
                 </table>
                 <h1>{el.amount}</h1>

@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useAppSelector} from "../hooks/useAppSelector";
-import {useAppDispatch} from "../hooks/useAppDispatch";
-import {getProduct} from "../store/Reducers/ActionCreators";
-import ProductCard from "./ProductCard";
+import {useAppSelector} from "../../hooks/useAppSelector";
+import {useAppDispatch} from "../../hooks/useAppDispatch";
+import {getProduct} from "../../store/Reducers/ActionCreators";
+import ProductCard from "../ProductCard";
 
 
 const Home = () => {

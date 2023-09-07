@@ -1,54 +1,53 @@
 import React, {useState} from 'react';
-import {IProduct} from "../../types/interface";
 import {BsCartCheckFill, BsFillBasket3Fill, BsFillBookmarkFill, BsFillCartFill, BsFillHeartFill} from "react-icons/bs";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {NavLink} from "react-router-dom";
 import {useAppSelector} from "../../hooks/useAppSelector";
 import {addToBasket} from "../../store/Reducers/BasketSlice";
-import {addToFavorite} from "../../store/Reducers/FavoriteSlice";
-import {MdOutlineDone} from "react-icons/md";
-import {FiBookmark} from "react-icons/fi";
+import {addToFavorite, removeFromFavorite} from "../../store/Reducers/FavoriteSlice";
 
 
-interface IProps {
-    el: IProduct
-}
-
-const ProductCard = ({el}: IProps) => {
+const ProductCard = ({el}: any ) => {
     const [fav, setFav] = useState(true)
     const dispatch = useAppDispatch()
     const {basketItems, value} = useAppSelector(state => state.basketSlice)
+    const {favoriteItems} = useAppSelector(state => state.favoriteSlice)
     const [button, setButton] = useState(false)
     const [daily, setDaily] = useState(false)
-    const doubleClick = () => {
-        setDaily(true)
-        setTimeout(() => {
-            setDaily(false)
-        }, 1000)
-    }
+    const [isLiked, setIsLiked] = useState(false)
+
+
     const addToFav = () => {
         dispatch(addToFavorite(el))
+        setIsLiked(true)
+        setFav(false)
+        setTimeout(() => setIsLiked(false), 1000)
     }
+    const handleAddToFav = () => {
+        dispatch(addToFavorite(el))
+    }
+
     const addToCart = () => {
         dispatch(addToBasket(el))
     }
-
 
     return (
         <div>
             {
                 el.title.includes(value) &&
                 <div className="flex flex-wrap p-14 ">
-                    <div
-                        className="max-w-sm bg-white border border-gray-100 rounded-lg shadow dark:bg-gray-500 dark:border-gray-500 w-60 h-120 shadow-blue-800  dark:bg-gray-300">
-                        <div>
-                            <img onClick={() => {
-                                doubleClick()
-                            }} className="rounded-t-lg w-64 h-72 p-5 " src={el.image} alt=""/>
-
+                    <div className="max-w-sm bg-white border border-gray-100 rounded-lg shadow dark:bg-gray-500 dark:border-gray-500 w-60 h-120 shadow-blue-800  dark:bg-gray-300">
+                        <div onDoubleClick={() => {
+                            addToFav()
+                            setFav(!fav)
+                        }}className="image">
+                            <img  className="rounded-t-lg w-64 h-72 p-5 " src={el.image}
+                                  alt=""/>
+                            <BsFillHeartFill
+                                className={`relative top-[-50%] transition-[.2s] left-[45%] text-pink-600 text-xl  ${isLiked ? "scale-100" : "scale-0"}`}/>
                         </div>
-                        <div className="p-5">
-                            <p className=" text-lg font-bold tracking-tight dark:text-blue-50">{el.title}</p>
+                        <div className="p-2">
+                            <p className=" font-bold tracking-tight dark:text-blue-50">{el.title}</p>
                         </div>
                         <div className="flex justify-around p-5 bg-gray-800 rounded-b-lg">
 
@@ -75,15 +74,15 @@ const ProductCard = ({el}: IProps) => {
 
                                     </svg>
                                 </button>}
-                            <button
-                                onClick={() => {
-                                    addToFav()
-                                    setFav(!fav)
-                                }}
-                                className="text-blue-50 w-8 h-8 ml-1 -mr-3 text-xl bg-gray-800 rounded-b-lg ">
+                            <button onClick={()=> {
+                                handleAddToFav()
+                                setFav(!fav)
+                            } }
+                                    className=" from-pink-600 hover:bg-gradient-to-bl}">
+
                                 {
-                                    fav ? <BsFillBookmarkFill className="text-white"/>
-                                        : <BsFillBookmarkFill    className="text-pink-600"/>
+                                    !fav ? <BsFillHeartFill className="text-pink-600"/>
+                                        : <BsFillHeartFill className="text-white"/>
                                 }
                             </button>
                         </div>
@@ -96,3 +95,4 @@ const ProductCard = ({el}: IProps) => {
 };
 
 export default ProductCard;
+

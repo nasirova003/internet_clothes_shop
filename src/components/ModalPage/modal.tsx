@@ -4,15 +4,15 @@ import {useAppSelector} from "../../hooks/useAppSelector";
 import {useAppDispatch} from "../../hooks/useAppDispatch";
 import {AiOutlineCloseCircle} from "react-icons/ai";
 import shop from "../../img/shop.jpg"
+import {GrClose} from "react-icons/gr";
 
 const Modal = ({el}: any) => {
     const dispatch = useAppDispatch()
     const {isOpen} = useAppSelector(state => state.modalSlice)
-
     return (
-        <div className="modalPage">
-            <button className="text-2xl p-1 ml-96" onClick={() => dispatch(closeModal(el))}><AiOutlineCloseCircle
-                className="text-white"/></button>
+        <div className="modalPage scale-100">
+            <button className="text-lg p-2 ml-96 scale-3" onClick={() => dispatch(closeModal(el))}><GrClose
+                className="text-amber-800"/></button>
             <div className="modalImg">
                 <img src={shop} alt="s"/>
             </div>

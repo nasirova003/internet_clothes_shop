@@ -9,25 +9,31 @@ const Admin = () => {
     const [title, setTitle] = useState<string>('')
     const [image, setImage] = useState<any>('')
     const [price, setPrice] = useState<string>('')
+     const [empty,setEmpty] = useState(true)
     const dispatch = useAppDispatch()
     const {admin} = useAppSelector(state => state.basketSlice)
 
     const handleAdmin = (e: React.FormEvent) => {
+         if (title && image && price !== '') {
+             e.preventDefault()
 
-        e.preventDefault()
+             if (e.target) {
+                 const newToDo = {
+                     id: new Date().toISOString(),
+                     title: title,
+                     image: image,
+                     price: price
+                 }
+                 dispatch(fetchingAdmin(newToDo))
+                 setImage('')
+                 setTitle('')
+                 setPrice('')
+             }
+               setEmpty(true)
 
-        if (e.target) {
-            const newToDo = {
-                id: new Date().toISOString(),
-                title: title,
-                image: image,
-                price: price
-            }
-            dispatch(fetchingAdmin(newToDo))
-            setImage('')
-            setTitle('')
-            setPrice('')
-        }
+         } else {
+              setEmpty(false)
+         }
 
     }
     console.log('admin', title)
@@ -37,14 +43,13 @@ const Admin = () => {
                 background: mode ? "gray" : "",
             }}>
                 <div className="flex">
-
                     <div className="block1 p-5" style={{
                         background: mode ? "gray" : "white"
                     }}>
                         <div className="adminBlock">
                             <h1 className="named">Image</h1>
                             <div className="adminInput">
-                                <input onChange={(e: any) => setImage(e.target.value)} type="" id="default-search"    value={image}
+                                <input style={{border:empty ? '' : '2px red dashed'}} onChange={(e: any) => setImage(e.target.value)} type="" id="default-search"    value={image}
                                        className="block w-96 p-4 left-10 pl-10 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
                                        placeholder="Add product image..."/>
                             </div>
@@ -53,7 +58,7 @@ const Admin = () => {
                         <div className="adminBlock">
                             <h1 className="named">Name</h1>
                             <div className="adminInput">
-                                <input type="search" id="default-search" value={title}
+                                <input style={{border:empty ? '' : '2px red dashed'}} type="search" id="default-search" value={title}
                                        onChange={(e: any) => setTitle(e.target.value)}
                                        className="block w-96 p-4 left-10 pl-10 border border-gray-300 rounded-lg bg-gray-50 focus:border-blue-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
                                        placeholder="Add product name..."/>
@@ -62,7 +67,7 @@ const Admin = () => {
                         <div className="adminBlock">
                             <h1 className="named">Price</h1>
                             <div className="adminInput">
-                                <input type="search" id="default-search" value={price}
+                                <input style={{border:empty ? '' : '2px red dashed'}} type="search" id="default-search" value={price}
                                        onChange={(e: any) => setPrice(e.target.value)}
                                        className="block w-96 p-4 left-10 pl-10 border border-gray-300 rounded-lg bg-gray-50 focus:border-blue-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
                                        placeholder="Add product name..."/>
@@ -81,6 +86,7 @@ const Admin = () => {
                 background: mode ? "gray" : "white"
             }}>
                 {
+
                     admin.map(el => (
                         <div className="adminCard">
                             <AdminCard el={el}/>

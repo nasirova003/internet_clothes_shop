@@ -17,7 +17,6 @@ const Header = ({el}:any) => {
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
           dispatch(search(e.target.value))
-
     }
 
     return (
@@ -27,7 +26,7 @@ const Header = ({el}:any) => {
                 background: mode ? "" : "grey"
             }}>
                 <div className="header text-xl flex justify-around text-blue-50">
-                    <Link to={"/"}> FASHION STORE</Link>
+                    <Link className="text-2xl" to={"/"}> FASHION</Link>
                     <Link to={"/admin"}>Add Product</Link>
                     <Link to={"/product"}>Product </Link>
 
@@ -47,7 +46,6 @@ const Header = ({el}:any) => {
 
                 </div>
                 {
-                    // el.value.id !== el.id ? 0 :
                     < div >
                     < input onChange={handleChange}    className="in w-96 p-4 left-10 pl-10 border-l-blue-100 rounded-lg bg-gray-50 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white"
                             placeholder="Add product image..."/>
@@ -55,7 +53,6 @@ const Header = ({el}:any) => {
                     </div>
 
                 }
-
 
             </div>
         </div>
